@@ -2,7 +2,9 @@ package com.sms.jwt.controller;
 
 import com.sms.jwt.entity.JwtRequest;
 import com.sms.jwt.entity.JwtResponse;
+import com.sms.jwt.entity.User;
 import com.sms.jwt.security.JwtHelper;
+import com.sms.jwt.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class AuthController {
 
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
@@ -59,5 +64,10 @@ public class AuthController {
     @ExceptionHandler(BadCredentialsException.class)
     public String exceptionHandler() {
         return "Credentials Invalid !!";
+    }
+
+    @PostMapping("/create-user")
+    public User createUser(@RequestBody User user){
+        return userService.createUser(user);
     }
 }
