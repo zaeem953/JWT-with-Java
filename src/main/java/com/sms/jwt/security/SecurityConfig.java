@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .authorizeRequests().
                 requestMatchers("/test").authenticated().requestMatchers("/auth/login").permitAll()
                 .requestMatchers("/auth/create-user").permitAll()
+                .requestMatchers("/auth/refresh").permitAll()
                 .anyRequest()
                 .authenticated().and()
 //                .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
